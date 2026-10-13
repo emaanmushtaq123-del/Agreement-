@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<title>Order Agreement | Bint-e-Mushtaq Art Studio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&family=Noto+Nastaliq+Urdu:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --ink:#000;
+  --paper:#fff;
+  --g1:#f4f4f4;
+  --g2:#d6d6d6;
+  --g3:#6b6b6b;
+  --serif:'Cormorant Garamond','Georgia','Times New Roman',serif;
+  --sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+  --urdu:'Noto Nastaliq Urdu','Jameel Noori Nastaleeq','Noto Naskh Arabic','Segoe UI',Tahoma,serif;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--g1);color:var(--ink);font-family:var(--sans);
+  font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+button{font-family:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+
+/* ---------- Screens ---------- */
+.screen{display:none;opacity:0;transition:opacity .45s ease}
+.screen.active{display:block}
+.screen.show{opacity:1}
+
+/* ---------- Welcome ---------- */
+#welcome{min-height:100vh;min-height:100dvh;padding:22px}
+#welcome.active{display:flex;align-items:center;justify-content:center}
+.welcome-card{
+  width:100%;max-width:460px;background:var(--paper);border:1.5px solid var(--ink);
+  box-shadow:9px 9px 0 var(--ink);padding:44px 28px 30px;text-align:center;
+  animation:cardIn .9s cubic-bezier(.2,.8,.2,1) both;
+}
+@keyframes cardIn{from{opacity:0;transform:translateY(26px) scale(.97)}to{opacity:1;transform:none}}
+.mono{
+  width:64px;height:64px;border:1.5px solid var(--ink);border-radius:50%;margin:0 auto 22px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:30px;font-weight:700;letter-spacing:.5px;
+}
+.welcome-card h1{font-family:var(--serif);font-weight:700;font-size:38px;line-height:1.05;margin:0 0 6px}
+.studio-ur{font-family:var(--urdu);font-size:21px;line-height:2.2;margin:0}
+.ink{display:block;width:230px;max-width:70%;height:36px;margin:2px auto 14px}
+.ink path{fill:none;stroke:var(--ink);stroke-width:2.6;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;animation:draw 2.2s .5s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.welcome-card .lead{font-family:var(--serif);font-size:22px;font-weight:600;margin:0 0 8px}
+.welcome-card p.sub{margin:0 auto 26px;max-width:34ch;color:var(--g3);font-size:15px}
+.btn{
+  display:block;width:100%;min-height:54px;padding:14px 20px;border:1.5px solid var(--ink);
+  background:var(--ink);color:var(--paper);font-size:16px;font-weight:600;letter-spacing:.2px;
+  transition:background .2s,color .2s,transform .1s;
+}
+.btn:hover{background:var(--paper);color:var(--ink)}
+.btn:active{transform:scale(.985)}
+.btn.ghost{background:var(--paper);color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--paper)}
+.btn[disabled]{opacity:.55;pointer-events:none}
+.fine{font-size:13px;color:var(--g3);margin:16px 0 0}
+
+/* ---------- Agreement ---------- */
+#agreement{padding:0 0 40px}
+.topbar{
+  position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1.5px solid var(--ink);
+  padding:calc(10px + env(safe-area-inset-top,0px)) 16px 10px;
+}
+.topbar-in{max-width:760px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.topbar b{font-family:var(--serif);font-size:20px;font-weight:700}
+.topbar span{font-size:13px;font-weight:500}
+.bar{height:3px;background:var(--g2);max-width:760px;margin:8px auto 0}
+.bar i{display:block;height:100%;width:0;background:var(--ink);transition:width .3s}
+
+.sheet{max-width:760px;margin:22px auto 0;background:var(--paper);border:1.5px solid var(--ink);padding:30px 20px 34px}
+@media(min-width:640px){.sheet{padding:44px 48px 48px;margin-top:30px}}
+.doc-head{text-align:center;border-bottom:1.5px solid var(--ink);padding-bottom:22px;margin-bottom:26px}
+.doc-head h2{font-family:var(--serif);font-size:34px;line-height:1.1;margin:0 0 4px;font-weight:700}
+.doc-head .ur{font-family:var(--urdu);font-size:20px;line-height:2.2;margin:0}
+.doc-head .meta{font-size:13px;color:var(--g3);margin:6px 0 0}
+
+label.field{display:block;font-weight:600;font-size:15px;margin-bottom:8px}
+label.field small{font-weight:400;color:var(--g3)}
+input.text{
+  width:100%;min-height:52px;padding:12px 14px;font-size:17px;font-family:var(--sans);
+  border:1.5px solid var(--ink);border-radius:0;background:var(--paper);color:var(--ink);
+}
+input.text::placeholder{color:#9a9a9a}
+.field-wrap.missing input.text{outline:3px dashed var(--ink);outline-offset:3px}
+
+h3.sec{font-family:var(--serif);font-size:25px;font-weight:700;margin:34px 0 4px;padding-bottom:6px;border-bottom:1px solid var(--ink)}
+.glance{width:100%;border-collapse:collapse;margin:12px 0 4px;font-size:14.5px}
+.glance th,.glance td{border:1px solid var(--ink);padding:9px 10px;text-align:left;vertical-align:top}
+.glance th{background:var(--ink);color:var(--paper);font-weight:600}
+.glance td.n{text-align:center;white-space:nowrap}
+.glance tfoot td{font-weight:600;background:var(--g1)}
+
+.clause{
+  display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start;
+  padding:18px 6px 18px 0;border-bottom:1px solid var(--g2);cursor:pointer;user-select:none;
+}
+.clause:last-of-type{border-bottom:none}
+.clause.missing{outline:3px dashed var(--ink);outline-offset:-3px}
+.cb{
+  width:44px;height:44px;border:1.5px solid var(--ink);background:var(--paper);display:flex;
+  align-items:center;justify-content:center;padding:0;transition:background .15s;
+}
+.cb svg{width:24px;height:24px;stroke:var(--paper);stroke-width:3.2;fill:none;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:26;stroke-dashoffset:26;transition:stroke-dashoffset .25s ease}
+.clause.on .cb{background:var(--ink)}
+.clause.on .cb svg{stroke-dashoffset:0}
+.c-title{font-weight:600;font-size:15px;margin:0 0 6px}
+.c-ur{font-family:var(--urdu);direction:rtl;text-align:right;font-size:18px;line-height:2.35;margin:0 0 4px}
+.c-en{font-size:14.5px;color:#333;margin:0}
+.c-agree{font-size:12.5px;color:var(--g3);margin:8px 0 0}
+.clause.on .c-agree{color:var(--ink);font-weight:600}
+
+/* Signature */
+.sig-box{position:relative;border:1.5px solid var(--ink);background:var(--paper);height:210px}
+#sigPad{display:block;width:100%;height:100%;touch-action:none;-ms-touch-action:none;cursor:crosshair}
+.sig-hint{position:absolute;left:0;right:0;bottom:44px;text-align:center;color:#a5a5a5;font-size:15px;pointer-events:none;transition:opacity .2s}
+.sig-line{position:absolute;left:18px;right:18px;bottom:38px;border-bottom:1px solid var(--g2);pointer-events:none}
+.sig-box.signed .sig-hint{opacity:0}
+.field-wrap.missing .sig-box{outline:3px dashed var(--ink);outline-offset:3px}
+.sig-actions{display:flex;justify-content:space-between;align-items:center;margin:10px 0 0;gap:10px}
+.sig-actions .btn{width:auto;min-height:44px;padding:8px 18px;font-size:14.5px}
+.sig-actions span{font-size:13px;color:var(--g3)}
+
+#errBox{display:none;margin:26px 0 0;border:1.5px solid var(--ink);padding:14px 16px;font-size:14.5px}
+#errBox.show{display:block;animation:shake .4s}
+#errBox b{display:block;margin-bottom:4px}
+#errBox ul{margin:0;padding-left:18px}
+@keyframes shake{20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
+.submit-wrap{margin-top:26px}
+
+/* ---------- Success ---------- */
+#success{min-height:100vh;min-height:100dvh;padding:22px}
+#success.active{display:flex;align-items:center;justify-content:center}
+.success-card{width:100%;max-width:520px;background:var(--paper);border:1.5px solid var(--ink);box-shadow:9px 9px 0 var(--ink);padding:38px 26px 30px;text-align:center}
+.ok-icon{width:96px;height:96px;margin:0 auto 14px;display:block}
+.ok-icon .frame{fill:none;stroke:var(--ink);stroke-width:3}
+.ok-icon .line{stroke:var(--ink);stroke-width:3;stroke-linecap:round;fill:none}
+.ok-icon .tick{stroke:var(--ink);stroke-width:4.5;stroke-linecap:round;stroke-linejoin:round;fill:none;stroke-dasharray:30;stroke-dashoffset:30;animation:draw2 .7s .3s ease forwards}
+@keyframes draw2{to{stroke-dashoffset:0}}
+.success-card h2{font-family:var(--serif);font-size:44px;font-weight:700;line-height:1;margin:0 0 6px}
+.success-card .ur{font-family:var(--urdu);font-size:20px;line-height:2.2;margin:0 0 8px}
+.file-chip{display:inline-block;max-width:100%;overflow-wrap:anywhere;border:1.5px solid var(--ink);padding:6px 12px;font-size:14px;font-weight:600;margin:4px 0 20px}
+.steps{list-style:none;counter-reset:s;text-align:left;margin:0 0 24px;padding:0;border-top:1px solid var(--ink)}
+.steps li{counter-increment:s;display:grid;grid-template-columns:34px 1fr;gap:10px;padding:13px 0;border-bottom:1px solid var(--g2);font-size:15px}
+.steps li::before{content:counter(s);width:28px;height:28px;border:1.5px solid var(--ink);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px}
+.stack{display:grid;gap:10px}
+
+/* ---------- Hidden receipt (rendered to PDF) ---------- */
+#stage{position:absolute;left:-10000px;top:0;width:794px;background:#fff;pointer-events:none}
+#receipt{position:relative;width:794px;background:#fff;color:#000;font-family:var(--sans)}
+#receipt .rb{padding:0 46px;background:#fff}
+#receipt .rb-in{padding:14px 0}
+#receipt .head{text-align:center;padding-top:44px}
+#receipt .head .in{border-bottom:2px solid #000;padding-bottom:20px}
+#receipt .head h1{font-family:var(--serif);font-size:40px;line-height:1.05;margin:0;font-weight:700}
+#receipt .head .u{font-family:var(--urdu);font-size:22px;line-height:2.2;margin:0}
+#receipt .head h2{font-family:var(--serif);font-size:25px;margin:6px 0 0;font-weight:600}
+#receipt .head .m{font-size:13px;color:#444;margin:6px 0 0}
+#receipt .cust{display:flex;justify-content:space-between;gap:20px;font-size:15px;border:1.5px solid #000;padding:12px 14px;margin:18px 0 6px}
+#receipt .cust b{font-weight:600}
+#receipt h3{font-family:var(--serif);font-size:23px;margin:10px 0 6px;border-bottom:1px solid #000;padding-bottom:4px;font-weight:700}
+#receipt table{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:4px}
+#receipt th,#receipt td{border:1px solid #000;padding:7px 9px;text-align:left;vertical-align:top}
+#receipt th{background:#000;color:#fff}
+#receipt tfoot td{background:#eee;font-weight:600}
+#receipt .rc{display:grid;grid-template-columns:30px 1fr;gap:12px;border-bottom:1px solid #cfcfcf;padding:10px 0}
+#receipt .rbox{width:24px;height:24px;border:1.5px solid #000;background:#000;display:flex;align-items:center;justify-content:center;margin-top:3px}
+#receipt .rbox svg{width:16px;height:16px;stroke:#fff;stroke-width:3.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+#receipt .rc .t{font-weight:600;font-size:14px;margin:0 0 3px}
+#receipt .rc .ur{font-family:var(--urdu);direction:rtl;text-align:right;font-size:16.5px;line-height:2.3;margin:0}
+#receipt .rc .en{font-size:13px;color:#333;margin:2px 0 0;line-height:1.5}
+#receipt .rc .ag{font-size:11.5px;font-weight:600;margin:4px 0 0}
+#receipt .sigblock{border:1.5px solid #000;padding:14px 16px;margin-top:14px}
+#receipt .sigblock img{display:block;width:100%;max-width:420px;height:150px;object-fit:contain;border-bottom:1px solid #000;margin:6px 0 8px;background:#fff}
+#receipt .sigrow{display:flex;justify-content:space-between;font-size:14px;gap:16px}
+#receipt .foot{text-align:center;font-size:12px;color:#444;padding-bottom:40px}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;animation-delay:0s !important;transition-duration:.01ms !important}
+  .ink path,.ok-icon .tick{stroke-dashoffset:0}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ STEP 1: WELCOME ============ -->
+<section id="welcome" class="screen active show" aria-label="Welcome">
+  <div class="welcome-card">
+    <div class="mono" aria-hidden="true">BM</div>
+    <h1 id="wName">Bint-e-Mushtaq Art Studio</h1>
+    <p class="studio-ur" id="wNameUr">بنتِ مشتاق آرٹ اسٹوڈیو</p>
+    <svg class="ink" viewBox="0 0 300 36" aria-hidden="true">
+      <path pathLength="1" d="M8 24 C 50 4, 96 40, 148 18 S 244 6, 292 22"/>
+    </svg>
+    <p class="lead">Order agreement</p>
+    <p class="sub">Read each point, tick it to agree, add your signature, and download your signed copy. It takes about three minutes.</p>
+    <button class="btn" id="startBtn" type="button">Start Agreement Process</button>
+    <p class="fine">Your signed copy is saved to your phone. Nothing is uploaded anywhere.</p>
+  </div>
+</section>
+
+<!-- ============ STEP 2: AGREEMENT FORM ============ -->
+<section id="agreement" class="screen" aria-label="Agreement form">
+  <div class="topbar">
+    <div class="topbar-in"><b id="tName">Bint-e-Mushtaq Art Studio</b><span id="progText">0 of 12 agreed</span></div>
+    <div class="bar"><i id="progBar"></i></div>
+  </div>
+
+  <div class="sheet" id="sheet">
+    <div class="doc-head">
+      <h2>Order Agreement</h2>
+      <p class="ur">آرڈر معاہدہ</p>
+      <p class="meta" id="todayLine"></p>
+    </div>
+
+    <div class="field-wrap" id="nameWrap">
+      <label class="field" for="custName">Customer name <small>(required) / آپ کا نام</small></label>
+      <input class="text" id="custName" type="text" dir="auto" autocomplete="name" placeholder="Type your full name" maxlength="80">
+    </div>
+
+    <h3 class="sec">Your order at a glance</h3>
+    <div style="overflow-x:auto" id="glanceHost"></div>
+
+    <div id="clausesHost"></div>
+
+    <h3 class="sec">Your signature <span style="font-weight:500;font-size:18px">/ دستخط</span></h3>
+    <div class="field-wrap" id="sigWrap" style="margin-top:14px">
+      <div class="sig-box" id="sigBox">
+        <canvas id="sigPad" aria-label="Signature pad. Sign with your finger or mouse."></canvas>
+        <div class="sig-line"></div>
+        <div class="sig-hint">Sign here with your finger</div>
+      </div>
+      <div class="sig-actions">
+        <span>By signing, you agree to all points above.</span>
+        <button class="btn ghost" id="clearSig" type="button">Clear Signature</button>
+      </div>
+    </div>
+
+    <div id="errBox" role="alert"></div>
+
+    <div class="submit-wrap">
+      <button class="btn" id="submitBtn" type="button">Confirm &amp; Download Agreement</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STEP 3: SUCCESS ============ -->
+<section id="success" class="screen" aria-label="Order confirmed">
+  <div class="success-card">
+    <svg class="ok-icon" viewBox="0 0 96 96" aria-hidden="true">
+      <rect class="frame" x="18" y="12" width="60" height="74" rx="4"/>
+      <rect class="frame" x="34" y="6" width="28" height="14" rx="3" style="fill:#fff"/>
+      <path class="tick" d="M30 40 L37 47 L49 33"/>
+      <path class="line" d="M56 40 H68"/>
+      <path class="tick" d="M30 62 L37 69 L49 55"/>
+      <path class="line" d="M56 62 H68"/>
+    </svg>
+    <h2>Order Confirmed!</h2>
+    <p class="ur">آپ کا آرڈر کنفرم ہو گیا ہے</p>
+    <div class="file-chip" id="fileChip">Agreement.pdf</div>
+    <ol class="steps">
+      <li><span>Your signed agreement has been saved to your phone's downloads. If it did not appear, tap "Download again".</span></li>
+      <li><span>Send that file to the studio on WhatsApp. Tap the button below, or attach it to the chat manually.</span></li>
+      <li><span>Once we receive it, the artist will share the full project plan with you. Please stay in touch.</span></li>
+    </ol>
+    <div class="stack">
+      <button class="btn" id="waBtn" type="button">Send File via WhatsApp</button>
+      <button class="btn ghost" id="dlAgain" type="button">Download again</button>
+    </div>
+  </div>
+</section>
+
+<!-- hidden render target for PDF -->
+<div id="stage" aria-hidden="true"><div id="receipt"></div></div>
+
+<!-- Client-side libraries (no backend needed) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+/* =====================================================================
+   CONFIG: edit the text here. Everything on screen and in the PDF
+   is built from this block.
+   ===================================================================== */
+const CONFIG = {
+  studio:   "Bint-e-Mushtaq Art Studio",
+  studioUr: "بنتِ مشتاق آرٹ اسٹوڈیو",
+  whatsapp: "92XXXXXXXXXX",   // your WhatsApp number, country code first, no + or spaces. Example: 923001234567
+  filePrefix: "Agreement",
+
+  items: [
+    { no: 1, name: "Surah Al-Falaq calligraphy", medium: "MDF board",    size: "6 × 3 feet",   qty: 1 },
+    { no: 2, name: "Texture art",                medium: "Canvas board", size: "16 × 45 inch", qty: 2 }
+  ],
+
+  payments: [
+    { stage: "First installment (advance)",     when: "When the full project plan is shared", pct: 35, note: "Non-refundable" },
+    { stage: "Second installment",              when: "At half-project stage",                pct: 25, note: "Photos / video shared first" },
+    { stage: "Third installment (COD)",         when: "On delivery, after checking parcel",   pct: 40, note: "Cash on delivery" }
+  ],
+
+  groups: [
+    { title: "Order details / آرڈر کی تفصیل", clauses: [
+      { t: "Order placed",
+        ur: "میں تصدیق کرتا/کرتی ہوں کہ میں نے Bint-e-Mushtaq Art Studio میں اپنا online order place کر دیا ہے۔",
+        en: "I confirm that I have placed my online order with Bint-e-Mushtaq Art Studio." },
+      { t: "Item 1: Calligraphy",
+        ur: "پہلا آرٹ پیس: سورۃ الفلق کیلیگرافی، MDF board پر، سائز 6 × 3 فٹ، کل 1 پیس۔",
+        en: "Surah Al-Falaq calligraphy on MDF board, size 6 × 3 feet. Quantity: 1 piece." },
+      { t: "Item 2: Texture art",
+        ur: "دوسرا آرٹ پیس: Texture art، canvas board پر، سائز 16 × 45 انچ، کل 2 پیس۔",
+        en: "Texture art on canvas board, size 16 × 45 inches. Quantity: 2 pieces." },
+      { t: "Total pieces",
+        ur: "میرے order میں کل 3 آرٹ پیسز شامل ہیں: 1 کیلیگرافی + 2 Texture art۔",
+        en: "My order has 3 art pieces in total: 1 calligraphy + 2 texture art." }
+    ]},
+    { title: "Communication / رابطہ", clauses: [
+      { t: "Staying in touch with the artist",
+        ur: "Procedure کے دوران artist سے رابطے میں رہنا میری ذمہ داری ہے۔ رابطہ نہ ہونے یا جواب دینے میں تاخیر کی صورت میں آرٹ پیس میں ہونے والے ردوبدل یا نقصان کی تمام تر ذمہ داری مجھ پر عائد ہوگی۔",
+        en: "It is my responsibility to stay in touch with the artist during the process. If I cannot be reached or reply late, I accept full responsibility for any changes or damage to the art piece that result." },
+      { t: "Cancellation if contact is lost",
+        ur: "مسلسل رابطہ منقطع رہنے کے نتیجے میں میرا order studio کی جانب سے cancel کر دیا جائے گا۔",
+        en: "If contact stays cut off continuously, the studio may cancel my order." }
+    ]},
+    { title: "Payment / ادائیگی", clauses: [
+      { t: "Three installments",
+        ur: "Payment کا process تین installments پر مشتمل ہوگا: 35% + 25% + 40% = 100%۔",
+        en: "Payment is made in three installments: 35% + 25% + 40% = 100%." },
+      { t: "First installment: 35% advance",
+        ur: "جب مجھے project کا مکمل plan share کر دیا جائے تو 35% advance amount مجھے studio کے account میں transfer کرنا ہوگی۔ یہ installment کسی صورت refundable نہیں ہوگی۔",
+        en: "When the complete project plan is shared with me, I will transfer a 35% advance to the studio account. This installment is non-refundable in any case." },
+      { t: "Second installment: 25%",
+        ur: "Half project مکمل ہونے پر 25% amount account میں transfer کرنا ہوگی۔ اس سے پہلے مجھے half project کی تصاویر یا video share کر دی جائیں گی۔ اگر میں مطمئن ہوں تو دوسری installment ادا کروں گا/گی؛ مطمئن نہ ہونے کی صورت میں اسی مرحلے پر order cancel کروا سکتا/سکتی ہوں۔",
+        en: "At the half-project stage I will transfer 25%. Before that, photos or a video of the half-finished project will be shared with me. If I am satisfied I will pay; if not, I may cancel the order at this stage." },
+      { t: "Third installment: 40% by COD",
+        ur: "تیسری installment 40% COD کے ذریعے ادا کی جائے گی۔ مجھے اجازت ہے کہ parcel کھول کر دیکھوں اور پھر رقم ادا کروں۔ میں آرٹ پیس کو اسی وقت properly چیک کروں گا/گی۔",
+        en: "The final 40% is paid by cash on delivery. I may open the parcel and inspect the artwork before paying, and I will check it properly at that moment." },
+      { t: "After delivery",
+        ur: "ڈیلیوری اور ادائیگی کے بعد آرٹ ورک میں کسی crack یا خرابی کی ذمہ داری studio/company پر نہیں ہوگی۔",
+        en: "After delivery and payment, the studio/company is not responsible for any crack or fault found later." }
+    ]},
+    { title: "Payment safety / ادائیگی کا تحفظ", clauses: [
+      { t: "Pay only to the confirmed account",
+        ur: "Online fraud اور scam سے بچاؤ کے لیے میں ادائیگی صرف اسی account میں کروں گا/گی جس کی تصدیق studio خود کرے۔",
+        en: "To avoid online fraud or scams, I will pay only to the account details that the studio itself has confirmed to me." }
+    ]}
+  ]
+};
+
+/* =====================================================================
+   Helpers
+   ===================================================================== */
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const ALL = [];                       // flat list of clauses with numbers
+CONFIG.groups.forEach(g => g.clauses.forEach(c => ALL.push(c)));
+ALL.forEach((c, i) => { c.n = i + 1; c.on = false; });
+const TOTAL_PIECES = CONFIG.items.reduce((a, b) => a + b.qty, 0);
+const TICK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 L10 17.5 L19 7"/></svg>';
+
+let pdfDoc = null, pdfBlob = null, pdfName = "";
+
+function fmtDate(d){
+  return d.toLocaleString('en-GB',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
+}
+
+/* =====================================================================
+   Screens
+   ===================================================================== */
+function go(fromId, toId){
+  const from = $(fromId), to = $(toId);
+  from.classList.remove('show');
+  setTimeout(() => {
+    from.classList.remove('active');
+    to.classList.add('active');
+    window.scrollTo(0, 0);
+    requestAnimationFrame(() => requestAnimationFrame(() => to.classList.add('show')));
+    if (toId === 'agreement') sizePad(false);
+  }, 380);
+}
+
+/* =====================================================================
+   Build the on-screen form
+   ===================================================================== */
+function buildForm(){
+  $('wName').textContent = $('tName').textContent = CONFIG.studio;
+  $('wNameUr').textContent = CONFIG.studioUr;
+  $('todayLine').textContent = CONFIG.studio + ' · ' + new Date().toLocaleDateString('en-GB',{day:'2-digit',month:'long',year:'numeric'});
+
+  // Glance tables
+  let h = '<table class="glance"><thead><tr><th>#</th><th>Art piece</th><th>Material</th><th>Size</th><th>Qty</th></tr></thead><tbody>';
+  CONFIG.items.forEach(i => { h += `<tr><td class="n">${i.no}</td><td>${esc(i.name)}</td><td>${esc(i.medium)}</td><td>${esc(i.size)}</td><td class="n">${i.qty}</td></tr>`; });
+  h += `</tbody><tfoot><tr><td colspan="4">Total art pieces</td><td class="n">${TOTAL_PIECES}</td></tr></tfoot></table>`;
+  h += '<table class="glance" style="margin-top:14px"><thead><tr><th>Payment</th><th>When</th><th>Share</th></tr></thead><tbody>';
+  CONFIG.payments.forEach(p => { h += `<tr><td>${esc(p.stage)}<br><small>${esc(p.note)}</small></td><td>${esc(p.when)}</td><td class="n">${p.pct}%</td></tr>`; });
+  const sum = CONFIG.payments.reduce((a, b) => a + b.pct, 0);
+  h += `</tbody><tfoot><tr><td colspan="2">Total</td><td class="n">${sum}%</td></tr></tfoot></table>`;
+  $('glanceHost').innerHTML = h;
+
+  // Clauses
+  let c = '';
+  CONFIG.groups.forEach(g => {
+    c += `<h3 class="sec">${esc(g.title)}</h3>`;
+    g.clauses.forEach(cl => {
+      c += `<div class="clause" data-n="${cl.n}" id="cl${cl.n}">
+        <button type="button" class="cb" role="checkbox" aria-checked="false" aria-label="Agree to point ${cl.n}">${TICK}</button>
+        <div>
+          <p class="c-title">${cl.n}. ${esc(cl.t)}</p>
+          <p class="c-ur" lang="ur">${esc(cl.ur)}</p>
+          <p class="c-en">${esc(cl.en)}</p>
+          <p class="c-agree">Tap to agree with this point</p>
+        </div>
+      </div>`;
+    });
+  });
+  $('clausesHost').innerHTML = c;
+
+  document.querySelectorAll('.clause').forEach(row => {
+    const n = +row.dataset.n, btn = row.querySelector('.cb');
+    const toggle = () => {
+      const cl = ALL[n - 1];
+      cl.on = !cl.on;
+      row.classList.toggle('on', cl.on);
+      row.classList.remove('missing');
+      btn.setAttribute('aria-checked', cl.on);
+      row.querySelector('.c-agree').textContent = cl.on ? 'You agreed to this point' : 'Tap to agree with this point';
+      updateProgress();
+    };
+    row.addEventListener('click', e => { if (e.target !== btn && !btn.contains(e.target)) toggle(); });
+    btn.addEventListener('click', toggle);
+  });
+  updateProgress();
+}
+
+function updateProgress(){
+  const done = ALL.filter(c => c.on).length;
+  $('progText').textContent = `${done} of ${ALL.length} agreed`;
+  $('progBar').style.width = (done / ALL.length * 100) + '%';
+}
+
+/* =====================================================================
+   Signature pad (touch + mouse)
+   ===================================================================== */
+const pad = $('sigPad'), ctx = pad.getContext('2d');
+let drawing = false, hasInk = false, last = null, prevMid = null, padW = 0;
+
+function sizePad(keep){
+  const r = pad.getBoundingClientRect();
+  if (!r.width) return;
+  const snap = (keep && hasInk) ? pad.toDataURL() : null;
+  const dpr = Math.max(window.devicePixelRatio || 1, 1);
+  pad.width = Math.round(r.width * dpr);
+  pad.height = Math.round(r.height * dpr);
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.lineWidth = 2.6; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.strokeStyle = '#000';
+  padW = r.width;
+  if (snap){ const img = new Image(); img.onload = () => ctx.drawImage(img, 0, 0, r.width, r.height); img.src = snap; }
+}
+function pt(e){
+  const r = pad.getBoundingClientRect();
+  const s = e.touches ? e.touches[0] : e;
+  return { x: s.clientX - r.left, y: s.clientY - r.top };
+}
+function startDraw(e){
+  e.preventDefault();
+  drawing = true;
+  last = pt(e); prevMid = last;
+  ctx.beginPath(); ctx.arc(last.x, last.y, 1.3, 0, Math.PI * 2); ctx.fillStyle = '#000'; ctx.fill();
+  markInk();
+}
+function moveDraw(e){
+  if (!drawing) return;
+  e.preventDefault();
+  const p = pt(e), mid = { x: (last.x + p.x) / 2, y: (last.y + p.y) / 2 };
+  ctx.beginPath(); ctx.moveTo(prevMid.x, prevMid.y); ctx.quadraticCurveTo(last.x, last.y, mid.x, mid.y); ctx.stroke();
+  prevMid = mid; last = p;
+}
+function endDraw(e){ if (drawing){ if (e && e.cancelable) e.preventDefault(); drawing = false; } }
+function markInk(){ hasInk = true; $('sigBox').classList.add('signed'); $('sigWrap').classList.remove('missing'); }
+
+pad.addEventListener('touchstart', startDraw, { passive: false });
+pad.addEventListener('touchmove',  moveDraw,  { passive: false });
+pad.addEventListener('touchend',   endDraw,   { passive: false });
+pad.addEventListener('touchcancel',endDraw,   { passive: false });
+pad.addEventListener('mousedown',  startDraw);
+pad.addEventListener('mousemove',  moveDraw);
+window.addEventListener('mouseup', endDraw);
+
+$('clearSig').addEventListener('click', () => {
+  ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, pad.width, pad.height); ctx.restore();
+  hasInk = false; $('sigBox').classList.remove('signed');
+});
+window.addEventListener('resize', () => {
+  const w = pad.getBoundingClientRect().width;
+  if (w && Math.abs(w - padW) > 1) sizePad(true);
+});
+
+/* =====================================================================
+   Validation
+   ===================================================================== */
+function validate(){
+  const errs = []; let first = null;
+  const name = $('custName').value.trim();
+  $('nameWrap').classList.toggle('missing', !name);
+  if (!name){ errs.push('Enter your name.'); first = first || $('nameWrap'); }
+
+  const open = ALL.filter(c => !c.on);
+  ALL.forEach(c => $('cl' + c.n).classList.toggle('missing', !c.on));
+  if (open.length){
+    errs.push(open.length === 1 ? `Agree to point ${open[0].n}.` : `Agree to the remaining ${open.length} points (${open.map(c => c.n).join(', ')}).`);
+    first = first || $('cl' + open[0].n);
+  }
+  $('sigWrap').classList.toggle('missing', !hasInk);
+  if (!hasInk){ errs.push('Sign in the signature box.'); first = first || $('sigWrap'); }
+
+  const box = $('errBox');
+  if (errs.length){
+    box.classList.remove('show'); void box.offsetWidth;
+    box.innerHTML = '<b>Before you continue:</b><ul>' + errs.map(e => `<li>${esc(e)}</li>`).join('') + '</ul>';
+    box.classList.add('show');
+    first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return false;
+  }
+  box.classList.remove('show');
+  return true;
+}
+
+/* =====================================================================
+   Receipt (hidden DOM that becomes the PDF)
+   ===================================================================== */
+function buildReceipt(name, sigData, ref, when){
+  const R = $('receipt');
+  let h = '';
+  h += `<div class="rb head"><div class="in">
+          <h1>${esc(CONFIG.studio)}</h1><p class="u">${esc(CONFIG.studioUr)}</p>
+          <h2>Order Agreement</h2>
+          <p class="m">Reference ${esc(ref)} · ${esc(when)}</p></div></div>`;
+  h += `<div class="rb"><div class="cust"><span>Customer: <b dir="auto">${esc(name)}</b></span><span>Pieces: <b>${TOTAL_PIECES}</b></span></div></div>`;
+
+  let t = '<h3>Order summary</h3><table><thead><tr><th>#</th><th>Art piece</th><th>Material</th><th>Size</th><th>Qty</th></tr></thead><tbody>';
+  CONFIG.items.forEach(i => t += `<tr><td>${i.no}</td><td>${esc(i.name)}</td><td>${esc(i.medium)}</td><td>${esc(i.size)}</td><td>${i.qty}</td></tr>`);
+  t += `</tbody><tfoot><tr><td colspan="4">Total art pieces</td><td>${TOTAL_PIECES}</td></tr></tfoot></table>`;
+  h += `<div class="rb"><div class="rb-in">${t}</div></div>`;
+
+  let p = '<h3>Payment schedule</h3><table><thead><tr><th>Installment</th><th>When</th><th>Share</th></tr></thead><tbody>';
+  CONFIG.payments.forEach(x => p += `<tr><td>${esc(x.stage)}<br><span style="font-size:12px">${esc(x.note)}</span></td><td>${esc(x.when)}</td><td>${x.pct}%</td></tr>`);
+  p += `</tbody><tfoot><tr><td colspan="2">Total</td><td>${CONFIG.payments.reduce((a, b) => a + b.pct, 0)}%</td></tr></tfoot></table>`;
+  h += `<div class="rb"><div class="rb-in">${p}</div></div>`;
+
+  h += `<div class="rb"><div class="rb-in"><h3>Terms acknowledged (${ALL.length} of ${ALL.length})</h3></div></div>`;
+  ALL.forEach(c => {
+    h += `<div class="rb"><div class="rc"><div class="rbox">${TICK}</div><div>
+            <p class="t">${c.n}. ${esc(c.t)}</p>
+            <p class="ur" lang="ur">${esc(c.ur)}</p>
+            <p class="en">${esc(c.en)}</p>
+            <p class="ag">Agreed by customer</p></div></div></div>`;
+  });
+  h += `<div class="rb"><div class="sigblock">
+          <b style="font-size:14px">Customer signature</b>
+          <img src="${sigData}" alt="Signature">
+          <div class="sigrow"><span>Name: <b dir="auto">${esc(name)}</b></span><span>Date: <b>${esc(when)}</b></span></div>
+        </div></div>`;
+  h += `<div class="rb foot"><p style="margin:14px 0 0">Digitally signed and acknowledged by the customer. Reference ${esc(ref)}.</p></div>`;
+  R.innerHTML = h;
+  return R;
+}
+
+/* =====================================================================
+   Generate and download
+   ===================================================================== */
+async function makePdf(name){
+  const now = new Date();
+  const ref = 'BMA-' + now.toISOString().slice(2, 10).replace(/-/g, '') + '-' + Math.floor(1000 + Math.random() * 9000);
+  const when = fmtDate(now);
+  const sig = document.createElement('canvas');
+  // flatten signature onto white so it prints cleanly
+  sig.width = pad.width; sig.height = pad.height;
+  const sctx = sig.getContext('2d'); sctx.fillStyle = '#fff'; sctx.fillRect(0, 0, sig.width, sig.height); sctx.drawImage(pad, 0, 0);
+  const receipt = buildReceipt(name, sig.toDataURL('image/png'), ref, when);
+
+  try { await document.fonts.load('16px "Noto Nastaliq Urdu"', 'اردو'); await document.fonts.ready; } catch (e) {}
+  await new Promise(r => setTimeout(r, 150));
+
+  const W = 794, h = receipt.offsetHeight;
+  const scale = Math.max(1, Math.min(2, Math.sqrt(14000000 / (W * h))));
+  const canvas = await html2canvas(receipt, {
+    scale, backgroundColor: '#ffffff', useCORS: true, logging: false, windowWidth: W,
+    onclone: doc => { const s = doc.getElementById('stage'); if (s) s.style.cssText = 'position:absolute;left:0;top:0;width:794px;'; }
+  });
+
+  // Page breaks on block boundaries so no clause is cut in half
+  const blocks = Array.from(receipt.children).map(b => ({ top: b.offsetTop, bottom: b.offsetTop + b.offsetHeight }));
+  const MARGIN = 10, CW = 190, PXMM = CW / W, H = (297 - MARGIN * 2) / PXMM - 2;
+  const segs = []; let segStart = 0, lastBottom = 0;
+  blocks.forEach(b => {
+    if (b.bottom - segStart > H && lastBottom > segStart){ segs.push([segStart, lastBottom]); segStart = b.top; }
+    lastBottom = b.bottom;
+  });
+  segs.push([segStart, lastBottom]);
+
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF({ unit: 'mm', format: 'a4', compress: true });
+  const k = canvas.height / h;
+  segs.forEach((s, i) => {
+    if (i) pdf.addPage();
+    const sy = Math.round(s[0] * k), sh = Math.max(1, Math.round((s[1] - s[0]) * k));
+    const part = document.createElement('canvas');
+    part.width = canvas.width; part.height = sh;
+    const pc = part.getContext('2d'); pc.fillStyle = '#fff'; pc.fillRect(0, 0, part.width, part.height);
+    pc.drawImage(canvas, 0, sy, canvas.width, sh, 0, 0, canvas.width, sh);
+    pdf.addImage(part.toDataURL('image/jpeg', 0.93), 'JPEG', MARGIN, MARGIN, CW, (s[1] - s[0]) * PXMM);
+    pdf.setFontSize(8); pdf.setTextColor(90);
+    pdf.text(`Page ${i + 1} of ${segs.length}`, 105, 292, { align: 'center' });
+  });
+  return pdf;
+}
+
+function safeName(n){
+  return n.replace(/[^\w\u0600-\u06FF\- ]+/g, '').trim().replace(/\s+/g, '_').slice(0, 50) || 'Customer';
+}
+
+$('submitBtn').addEventListener('click', async () => {
+  if (!validate()) return;
+  if (typeof html2canvas === 'undefined' || !window.jspdf){
+    $('errBox').innerHTML = '<b>PDF tools did not load.</b>Check your internet connection and reload this page. Your page must be online the first time it opens.';
+    $('errBox').classList.add('show'); return;
+  }
+  const btn = $('submitBtn'), name = $('custName').value.trim();
+  btn.disabled = true; btn.textContent = 'Preparing your agreement…';
+  try {
+    pdfDoc = await makePdf(name);
+    pdfName = `${CONFIG.filePrefix}_${safeName(name)}.pdf`;
+    pdfBlob = pdfDoc.output('blob');
+    pdfDoc.save(pdfName);
+    $('fileChip').textContent = pdfName;
+    go('agreement', 'success');
+  } catch (err){
+    console.error(err);
+    $('errBox').innerHTML = '<b>Something went wrong while creating the file.</b>Please try again. If it keeps failing, reload the page and open it in Chrome or Safari.';
+    $('errBox').classList.add('show');
+  } finally {
+    btn.disabled = false; btn.textContent = 'Confirm & Download Agreement';
+  }
+});
+
+$('dlAgain').addEventListener('click', () => { if (pdfDoc) pdfDoc.save(pdfName); });
+
+$('waBtn').addEventListener('click', async () => {
+  const msg = `Assalam o Alaikum, I have read and signed the order agreement for ${CONFIG.studio}. Please find my signed file attached (${pdfName}).`;
+  try {
+    const file = new File([pdfBlob], pdfName, { type: 'application/pdf' });
+    if (navigator.canShare && navigator.canShare({ files: [file] })){
+      await navigator.share({ files: [file], text: msg });   // pick WhatsApp from the share sheet
+      return;
+    }
+  } catch (e) { if (e && e.name === 'AbortError') return; }
+  const num = String(CONFIG.whatsapp).replace(/\D/g, '');
+  const url = num && !/X/i.test(CONFIG.whatsapp) ? `https://wa.me/${num}?text=${encodeURIComponent(msg)}` : `https://wa.me/?text=${encodeURIComponent(msg)}`;
+  window.open(url, '_blank');
+});
+
+/* =====================================================================
+   Start
+   ===================================================================== */
+$('startBtn').addEventListener('click', () => go('welcome', 'agreement'));
+buildForm();
+</script>
+</body>
+</html>
